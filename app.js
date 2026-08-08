@@ -18,21 +18,45 @@ function iniciarEscaner() {
     scanner = new Html5Qrcode("reader");
   }
 
+  const configuracion = {
+    fps: 15,
+    qrbox: function(viewfinderWidth, viewfinderHeight) {
+      return {
+        width: Math.floor(viewfinderWidth * 0.9),
+        height: Math.floor(viewfinderHeight * 0.35)
+      };
+    },
+    aspectRatio: 1.777778,
+    formatsToSupport: [
+      Html5QrcodeSupportedFormats.QR_CODE,
+      Html5QrcodeSupportedFormats.CODE_128,
+      Html5QrcodeSupportedFormats.CODE_39,
+      Html5QrcodeSupportedFormats.CODE_93,
+      Html5QrcodeSupportedFormats.EAN_13,
+      Html5QrcodeSupportedFormats.EAN_8,
+      Html5QrcodeSupportedFormats.UPC_A,
+      Html5QrcodeSupportedFormats.UPC_E,
+      Html5QrcodeSupportedFormats.ITF
+    ]
+  };
+
   scanner.start(
     { facingMode: "environment" },
-    { fps: 10, qrbox: 250 },
+    configuracion,
     function(decodedText) {
       codigo.value = decodedText;
       estado.textContent = "Código leído correctamente";
-      scanner.stop();
+
+      scanner.stop().catch(function() {});
     },
-    function(error) {}
+    function(errorMessage) {
+      // Sigue buscando hasta encontrar un código válido
+    }
   ).catch(function(err) {
     estado.textContent = "Error al abrir la cámara";
     console.log(err);
   });
 }
-
 btnGuardar.addEventListener("click", function () {
   if (codigo.value.trim() === "") {
     estado.textContent = "Primero escanee o escriba un código";
