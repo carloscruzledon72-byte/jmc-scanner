@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JMC Scanner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="app">
+    <h1>JMC Scanner</h1>
+
+    <button id="btnEscanear">📷 Escanear código</button>
+<div id="reader" style="width:100%; margin-top:20px;"></div>
+    <label>Código</label>
+    <input type="text" id="codigo">
+
+    <label>Descripción</label>
+    <input type="text" id="descripcion">
+
+    <label>Ubicación</label>
+    <input type="text" id="ubicacion">
+
+    <label>Usuario</label>
+    <input type="text" id="usuario">
+
+    <button id="btnGuardar">💾 Guardar</button>
+
+    <p id="estado">Listo para trabajar</p>
+  </main>
+<script src="https://unpkg.com/html5-qrcode"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
