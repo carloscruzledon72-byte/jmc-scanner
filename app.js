@@ -31,8 +31,8 @@ function iniciarEscaner() {
 
         qrbox: function(viewfinderWidth, viewfinderHeight) {
             return {
-                width: Math.floor(viewfinderWidth * 0.9),
-                height: Math.floor(viewfinderHeight * 0.35)
+               width: Math.floor(viewfinderWidth * 0.85),
+height: 180
             };
         },
 
@@ -61,11 +61,11 @@ function iniciarEscaner() {
             codigo.value = decodedText;
             estado.textContent = "Código leído correctamente";
 
-            scanner.stop()
-                .then(() => {
-                    iniciarQuagga();
-                })
-                .catch(function() {});
+           scanner.stop()
+    .then(() => {
+        scanner = null;
+    })
+    .catch(function() {});
         },
 
         function(errorMessage) {
